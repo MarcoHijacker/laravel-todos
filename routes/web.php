@@ -19,4 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Main pages
 Route::get('/home', 'HomeController@index')->name('home');
+
+// CRUD Lists
+Route::get('/create/checklist', 'ChecklistController@create') -> name('create-checklist');
+Route::post('/store/checklist', 'ChecklistController@store') -> name('store-checklist');

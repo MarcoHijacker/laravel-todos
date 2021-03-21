@@ -1,3 +1,6 @@
+// Fontawesome
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -6,3 +9,86 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// General CSS
+
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.welcome {
+    margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    .home-title {
+        font-weight: bolder;
+    }
+    .brand {
+        i.fa-check-circle-o, i.fa-hand-o-right {
+            color: #3490dc;
+        }
+    }
+}
+
+ul.navbar-nav {
+    li.nav-item.add-list {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        a {
+            text-decoration: none;
+        }
+    }
+}
