@@ -9,30 +9,40 @@ use App\Checklist;
 
 class ChecklistController extends Controller
 {
-    public function create() {
+  public function __construct() {
+    $this->middleware('auth');
+  }
 
-      $users = User::all();
-      return view('create-checklist', compact('users'));
+  public function index() {
 
-    }
+    $checklists = Checklist::all();
+    return view('my-checklists', compact('checklists'));
+  }
 
-    public function store(Request $request) {
+  public function create() {
 
-      $data = $request -> validate([
+    $users = User::all();
+    return view('create-checklist', compact('users'));
 
-        'name' => 'required|min:3|max:35',
-        'description' => 'required|min:10|max:250',
-        'status' => 'required|max:1',
-        'priority' => 'gte:0',
-        'user_id' => 'required|gte:0'
+  }
 
-      ]);
+  public function store(Request $request) {
 
-      $checklist = Checklist::create($data);
+    $data = $request -> validate([
 
-      return redirect() -> route('home');
+      'name' => 'required|min:3|max:35',
+      'description' => 'required|min:10|max:250',
+      'status' => 'required|max:1',
+      'priority' => 'gte:0',
+      'user_id' => 'required|gte:0'
 
-    }
+    ]);
+
+    $checklist = Checklist::create($data);
+
+    return redirect() -> route('index-checklist');
+
+  }
 
 
 }
