@@ -49,16 +49,17 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item add-list">
+                            {{-- <li class="nav-item add-list">
                                 <a href="{{ route('create-checklist') }}"><i class="fa fa-plus-square" aria-hidden="true"></i> Create new List</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</a>
+                                    {{-- rotta modificata verso la index che mostra le liste e da li permette di creare nuove liste --}}
+                                    <a class="dropdown-item" href="{{ route('index-checklist') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</a>
                                     <a class="dropdown-item" href="#"><i class="fa fa-share-alt-square" aria-hidden="true"></i> Shared Lists</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
