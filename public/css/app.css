@@ -14067,3 +14067,8 @@ ul.navbar-nav li.nav-item.add-list a {
   text-decoration: none;
 }
 
+.single-list {
+  display: flex;
+  justify-content: space-between;
+}
+
