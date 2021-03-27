@@ -18,7 +18,7 @@ class Task extends Model
 
   public function checklist() {
 
-    return $this -> belongsTo(Task::class);
+    return $this -> belongsTo(Checklist::class);
 
   }
 }

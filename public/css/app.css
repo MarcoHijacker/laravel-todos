@@ -14072,3 +14072,9 @@ ul.navbar-nav li.nav-item.add-list a {
   justify-content: space-between;
 }
 
+.card-lello {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
