@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChecklistApiController;
+use App\Http\Controllers\TaskApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,25 @@ use App\Http\Controllers\ChecklistApiController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Api INDEX
+
+// CHECKLIST API:
+// INDEX
 Route::get('/checklists', [ChecklistApiController::class, 'index']);
-// Api CREATE
+// CREATE
 Route::post('/checklists', [ChecklistApiController::class, 'create']);
-// Api UPDATE
+// UPDATE
 Route::post('/checklists/{id}', [ChecklistApiController::class, 'update']);
-// Api DESTROY
+// DESTROY
 Route::delete('/checklists/{id}', [ChecklistApiController::class, 'destroy']);
+
+// TASK API:
+// INDEX
+Route::get('/tasks', [TaskApiController::class, 'index']);
+// BOUNDED INDEX
+Route::get('/tasks/{id}', [TaskApiController::class, 'related']);
+// CREATE
+Route::post('/tasks', [TaskApiController::class, 'create']);
+// UPDATE
+Route::post('/tasks/{id}', [TaskApiController::class, 'update']);
+// DESTROY
+Route::delete('/tasks/{id}', [TaskApiController::class, 'destroy']);

@@ -59,7 +59,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     {{-- rotta modificata verso la index che mostra le liste e da li permette di creare nuove liste --}}
-                                    <a class="dropdown-item" href="{{ route('index-checklist') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</a>
+                                    <a class="dropdown-item" href="{{ route('user-checklist') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</a>
                                     <a class="dropdown-item" href="#"><i class="fa fa-share-alt-square" aria-hidden="true"></i> Shared Lists</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
   <div class="container">
     <div class="text-center">
       <h1>{{ $checklist -> name }} - ID: {{ $checklist -> id }}</h1>
@@ -12,7 +11,7 @@
   </div><br>
 
   <div id="app">
-    <single-task :checklist="{{ $checklist }}" />
+    <task-list :checklist="{{ $checklist -> id }}" />
   </div>
 
 @endsection

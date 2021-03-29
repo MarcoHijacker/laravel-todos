@@ -2,20 +2,21 @@
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 // General CSS
 
-html, body {
+html,
+body {
     background-color: #fff;
     color: #636b6f;
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     font-weight: 200;
     height: 100vh;
     margin: 0;
@@ -54,7 +55,7 @@ html, body {
     padding: 0 25px;
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -76,7 +77,8 @@ html, body {
         font-weight: bolder;
     }
     .brand {
-        i.fa-check-circle-o, i.fa-hand-o-right {
+        i.fa-check-circle-o,
+        i.fa-hand-o-right {
             color: #3490dc;
         }
     }
@@ -102,4 +104,23 @@ ul.navbar-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.action-icons {
+    cursor: pointer;
+}
+
+.task-creation {
+    display: block;
+    text-align: center;
+}
+
+.new-task-module {
+    text-align: center;
+    .box {
+        margin: 5px 0;
+    }
+    .hidden {
+        display: none;
+    }
 }

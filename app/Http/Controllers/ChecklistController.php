@@ -18,6 +18,12 @@ class ChecklistController extends Controller
     $checklists = Checklist::all();
     return view('index-checklist', compact('checklists'));
   }
+  // Personal Iser checklists
+    public function personal() {
+
+    $checklists = Checklist::all() -> sortByDesc('created_at');
+    return view('user-checklist', compact('checklists'));
+  }
   // Create new checklist
   public function create() {
 
@@ -47,7 +53,7 @@ class ChecklistController extends Controller
 
     $checklist = Checklist::create($data);
 
-    return redirect() -> route('index-checklist');
+    return redirect() -> route('user-checklist');
 
   }
   // Edit existing checklist

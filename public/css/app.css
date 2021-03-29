@@ -14078,3 +14078,24 @@ ul.navbar-nav li.nav-item.add-list a {
   align-items: center;
 }
 
+.action-icons {
+  cursor: pointer;
+}
+
+.task-creation {
+  display: block;
+  text-align: center;
+}
+
+.new-task-module {
+  text-align: center;
+}
+
+.new-task-module .box {
+  margin: 5px 0;
+}
+
+.new-task-module .hidden {
+  display: none;
+}
+
