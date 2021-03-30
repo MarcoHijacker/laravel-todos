@@ -54,8 +54,13 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody v-for="(task, index) in tasks" :key="`tsk${index}`">
-                            <single-task :task="task" />
+                        <tbody>
+                            <single-task
+                                v-for="(task, index) in tasks"
+                                :key="`tsk${index}`"
+                                :task="task"
+                                @upd-tasks="updTasks"
+                            />
                         </tbody>
                     </table>
                 </div>
@@ -66,9 +71,9 @@
 
 <script>
 import axios from "axios";
-import SingleTask from './SingleTask.vue';
+import SingleTask from "./SingleTask.vue";
 export default {
-  components: { SingleTask },
+    components: { SingleTask },
     data() {
         return {
             message: "Prova",
@@ -76,7 +81,7 @@ export default {
             tasks: {},
             addingTask: {
                 checklist_id: this.checklist
-            },
+            }
         };
     },
     props: {
@@ -89,20 +94,6 @@ export default {
             .finally(() => console.log("Tasks Data loading completed."));
     },
     methods: {
-        // deleteTask(id) {
-        //     axios
-        //         .delete("http://127.0.0.1:8000/api/tasks/" + id)
-        //         .then(({ data }) => (this.trash = data))
-        //         .finally(() => {
-        //             console.log("Task " + id + " deleted.");
-        //             axios
-        //                 .get("http://127.0.0.1:8000/api/tasks/" + this.checklist)
-        //                 .then(({ data }) => (this.tasks = data))
-        //                 .finally(() =>
-        //                     console.log("Tasks Data loading completed.")
-        //                 );
-        //         });
-        // },
         storeTask() {
             axios
                 .post("http://127.0.0.1:8000/api/tasks/", this.addingTask)
@@ -110,13 +101,21 @@ export default {
                 .finally(() => {
                     console.log("Task added in DB.");
                     axios
-                        .get("http://127.0.0.1:8000/api/tasks/" + this.checklist)
+                        .get(
+                            "http://127.0.0.1:8000/api/tasks/" + this.checklist
+                        )
                         .then(({ data }) => (this.tasks = data))
                         .finally(() =>
                             console.log("Tasks Data loading completed.")
                         );
                 });
         },
+        updTasks() {
+            axios
+                .get("http://127.0.0.1:8000/api/tasks/" + this.checklist)
+                .then(({ data }) => (this.tasks = data))
+                .finally(() => console.log("Tasks Data loading completed."));
+        }
     }
 };
 </script>

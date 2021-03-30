@@ -2020,6 +2020,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2037,11 +2062,25 @@ __webpack_require__.r(__webpack_exports__);
     deleteTask: function deleteTask(id) {
       var _this = this;
 
-      axios["delete"]("http://127.0.0.1:8000/api/tasks/" + id).then(function (res) {
-        _this.trash = res.data;
+      axios["delete"]("http://127.0.0.1:8000/api/tasks/" + id).then(function (response) {
+        _this.trash = response.data;
         console.log(_this.trash);
       })["finally"](function () {
-        console.log("Task " + id + " deleted.");
+        _this.$emit("upd-tasks");
+      });
+    },
+    editTask: function editTask(id) {
+      var _this2 = this;
+
+      axios.post("http://127.0.0.1:8000/api/tasks/" + id, this.task).then(function (_ref) {
+        var data = _ref.data;
+        return console.log(data);
+      })["finally"](function () {
+        _this2.$emit("upd-tasks");
+
+        _this2.unlockEditActions();
+
+        console.log("Task " + id + " updated in DB!");
       });
     },
     unlockEditActions: function unlockEditActions() {
@@ -2065,6 +2104,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _SingleTask_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SingleTask.vue */ "./resources/js/components/SingleTask.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2161,20 +2205,6 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    // deleteTask(id) {
-    //     axios
-    //         .delete("http://127.0.0.1:8000/api/tasks/" + id)
-    //         .then(({ data }) => (this.trash = data))
-    //         .finally(() => {
-    //             console.log("Task " + id + " deleted.");
-    //             axios
-    //                 .get("http://127.0.0.1:8000/api/tasks/" + this.checklist)
-    //                 .then(({ data }) => (this.tasks = data))
-    //                 .finally(() =>
-    //                     console.log("Tasks Data loading completed.")
-    //                 );
-    //         });
-    // },
     storeTask: function storeTask() {
       var _this2 = this;
 
@@ -2189,6 +2219,16 @@ __webpack_require__.r(__webpack_exports__);
         })["finally"](function () {
           return console.log("Tasks Data loading completed.");
         });
+      });
+    },
+    updTasks: function updTasks() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/tasks/" + this.checklist).then(function (_ref4) {
+        var data = _ref4.data;
+        return _this3.tasks = data;
+      })["finally"](function () {
+        return console.log("Tasks Data loading completed.");
       });
     }
   }
@@ -37909,29 +37949,105 @@ var render = function() {
     _vm._v(" "),
     _c("td", [
       _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.task.name,
+            expression: "task.name"
+          }
+        ],
         attrs: { type: "text", disabled: _vm.isDisabled },
-        domProps: { value: _vm.task.name }
+        domProps: { value: _vm.task.name },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.task, "name", $event.target.value)
+          }
+        }
       })
     ]),
     _vm._v(" "),
     _c("td", [
       _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.task.description,
+            expression: "task.description"
+          }
+        ],
         attrs: { type: "text", disabled: _vm.isDisabled },
-        domProps: { value: _vm.task.description }
+        domProps: { value: _vm.task.description },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.task, "description", $event.target.value)
+          }
+        }
       })
     ]),
     _vm._v(" "),
     _c("td", [
       _c("input", {
-        attrs: { type: "number", disabled: _vm.isDisabled },
-        domProps: { value: _vm.task.priority }
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.task.priority,
+            expression: "task.priority"
+          }
+        ],
+        attrs: {
+          type: "text",
+          name: "pin",
+          maxlength: "1",
+          size: "1",
+          disabled: _vm.isDisabled
+        },
+        domProps: { value: _vm.task.priority },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.task, "priority", $event.target.value)
+          }
+        }
       })
     ]),
     _vm._v(" "),
     _c("td", [
       _c("input", {
-        attrs: { type: "number", disabled: _vm.isDisabled },
-        domProps: { value: _vm.task.status }
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.task.status,
+            expression: "task.status"
+          }
+        ],
+        attrs: {
+          type: "text",
+          name: "pin",
+          maxlength: "1",
+          size: "1",
+          disabled: _vm.isDisabled
+        },
+        domProps: { value: _vm.task.status },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.task, "status", $event.target.value)
+          }
+        }
       })
     ]),
     _vm._v(" "),
@@ -37952,12 +38068,23 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _vm.isIconVisible
-        ? _c("i", {
-            staticClass: "fa fa-check",
-            attrs: { "aria-hidden": "true" }
-          })
-        : _vm._e()
+      _c("i", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isIconVisible,
+            expression: "isIconVisible"
+          }
+        ],
+        staticClass: "fa fa-check",
+        attrs: { "aria-hidden": "true" },
+        on: {
+          click: function($event) {
+            return _vm.editTask(_vm.task.id)
+          }
+        }
+      })
     ])
   ])
 }
@@ -38162,23 +38289,21 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "bd-example" }, [
-          _c(
-            "table",
-            { staticClass: "table" },
-            [
-              _vm._m(1),
-              _vm._v(" "),
+          _c("table", { staticClass: "table" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
               _vm._l(_vm.tasks, function(task, index) {
-                return _c(
-                  "tbody",
-                  { key: "tsk" + index },
-                  [_c("single-task", { attrs: { task: task } })],
-                  1
-                )
-              })
-            ],
-            2
-          )
+                return _c("single-task", {
+                  key: "tsk" + index,
+                  attrs: { task: task },
+                  on: { "upd-tasks": _vm.updTasks }
+                })
+              }),
+              1
+            )
+          ])
         ])
       ])
     ])
@@ -50696,8 +50821,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/gianluca/Desktop/my_laravel/laravel-todos-clone/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/gianluca/Desktop/my_laravel/laravel-todos-clone/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\myprojects\laravel-todos\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\myprojects\laravel-todos\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
