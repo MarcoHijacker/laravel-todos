@@ -23,7 +23,7 @@
                     <option value="0" selected>Undone</option>
                     <option value="1">Done</option>
                 </select>
-                <label for="name">Priority: </label>
+                <label for="priority">Priority: </label>
                 <select name="priority" v-model="addingTask.priority">
                     <option value="2">High</option>
                     <option value="1">Middle</option>
@@ -40,7 +40,6 @@
                 Push in DB
             </button>
         </div>
-
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="bd-example">
@@ -55,28 +54,8 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr
-                                v-for="(task, index) in tasks"
-                                :key="`tsk${index}`"
-                            >
-                                <th scope="row">{{ task.id }}</th>
-                                <td><input :value="task.name" disabled></td>
-                                <td><input :value="task.description" disabled></td>
-                                <td><input :value="task.priority" disabled></td>
-                                <td><input :value="task.status" disabled></td>
-                                <td class="action-icons">
-                                    <i
-                                        class="fa fa-pencil"
-                                        aria-hidden="true"
-                                    ></i>
-                                    <i
-                                        @click="deleteTask(task.id)"
-                                        class="fa fa-trash"
-                                        aria-hidden="true"
-                                    ></i>
-                                </td>
-                            </tr>
+                        <tbody v-for="(task, index) in tasks" :key="`tsk${index}`">
+                            <single-task :task="task" />
                         </tbody>
                     </table>
                 </div>
@@ -87,7 +66,9 @@
 
 <script>
 import axios from "axios";
+import SingleTask from './SingleTask.vue';
 export default {
+  components: { SingleTask },
     data() {
         return {
             message: "Prova",
@@ -96,7 +77,6 @@ export default {
             addingTask: {
                 checklist_id: this.checklist
             },
-            trash: {}
         };
     },
     props: {
@@ -109,20 +89,20 @@ export default {
             .finally(() => console.log("Tasks Data loading completed."));
     },
     methods: {
-        deleteTask(id) {
-            axios
-                .delete("http://127.0.0.1:8000/api/tasks/" + id)
-                .then(({ data }) => (this.trash = data))
-                .finally(() => {
-                    console.log("Task " + id + " deleted.");
-                    axios
-                        .get("http://127.0.0.1:8000/api/tasks/" + this.checklist)
-                        .then(({ data }) => (this.tasks = data))
-                        .finally(() =>
-                            console.log("Tasks Data loading completed.")
-                        );
-                });
-        },
+        // deleteTask(id) {
+        //     axios
+        //         .delete("http://127.0.0.1:8000/api/tasks/" + id)
+        //         .then(({ data }) => (this.trash = data))
+        //         .finally(() => {
+        //             console.log("Task " + id + " deleted.");
+        //             axios
+        //                 .get("http://127.0.0.1:8000/api/tasks/" + this.checklist)
+        //                 .then(({ data }) => (this.tasks = data))
+        //                 .finally(() =>
+        //                     console.log("Tasks Data loading completed.")
+        //                 );
+        //         });
+        // },
         storeTask() {
             axios
                 .post("http://127.0.0.1:8000/api/tasks/", this.addingTask)
