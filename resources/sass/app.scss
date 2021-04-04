@@ -129,3 +129,14 @@ ul.navbar-nav {
 .tasks-table {
     margin-top: 20px;
 }
+.checklist-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    span.checklist-title {
+        font-weight: bold;
+    }
+}
+.checklist-user {
+    margin-top: 20px;
+}

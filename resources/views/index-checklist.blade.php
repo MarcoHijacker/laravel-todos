@@ -17,9 +17,9 @@
                       <a href="{{ route('show-checklist', $checklist -> id) }}"> {{ $checklist -> name }} </a>
                   </h3>
                   <div>
-                    <a href="{{ route('show-checklist', $checklist -> id) }}" type="button" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
-                    <a href="{{ route('edit-checklist', $checklist -> id) }}" type="button" class="btn btn-secondary"><i class="fa fa-pencil-square-o"></i> Edit</a>
-                    <a href="{{ route('destroy-checklist', $checklist -> id) }}" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                    <a href="{{ route('show-checklist', $checklist -> id) }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> View</a>
+                    <a href="{{ route('edit-checklist', $checklist -> id) }}" type="button" class="btn btn-secondary btn-sm"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                    <a href="{{ route('destroy-checklist', $checklist -> id) }}" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</a>
                   </div>
                 </div>
 

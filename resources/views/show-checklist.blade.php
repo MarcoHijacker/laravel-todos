@@ -3,9 +3,9 @@
 
   <div class="container">
     <div class="text-center">
-      <h1>{{ $checklist -> name }} - ID: {{ $checklist -> id }}</h1>
+      <h2>{{ $checklist -> name }}</h2>
       <div class="description">
-        <em>Descrizione:</em> {{ $checklist -> description }}
+        {{ $checklist -> description }}
       </div>
     </div>
   </div><br>

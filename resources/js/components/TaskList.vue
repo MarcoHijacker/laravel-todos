@@ -10,8 +10,8 @@
             <div class="box form-group">
                 <label for="description">Description</label><br />
                 <textarea 
-                    class="form-control" 
                     rows="2"
+                    cols="40"
                     name="description"
                     v-model="addingTask.description"
                     >
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="row justify-content-center tasks-table">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="bd-example">
                     <table class="table">
                         <thead class="table-dark">

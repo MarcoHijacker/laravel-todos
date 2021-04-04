@@ -38209,8 +38209,7 @@ var render = function() {
                 expression: "addingTask.description"
               }
             ],
-            staticClass: "form-control",
-            attrs: { rows: "2", name: "description" },
+            attrs: { rows: "2", cols: "40", name: "description" },
             domProps: { value: _vm.addingTask.description },
             on: {
               input: function($event) {
@@ -38358,7 +38357,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center tasks-table" }, [
-      _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "bd-example" }, [
           _c("table", { staticClass: "table" }, [
             _vm._m(0),

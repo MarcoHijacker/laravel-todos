@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Checklist;
+use App\Task;
 
 class ChecklistController extends Controller
 {
@@ -17,12 +18,15 @@ class ChecklistController extends Controller
 
     $checklists = Checklist::all();
     return view('index-checklist', compact('checklists'));
+
   }
   // Personal Iser checklists
     public function personal() {
 
+    $tasks = Task::all();
     $checklists = Checklist::all() -> sortByDesc('created_at');
-    return view('user-checklist', compact('checklists'));
+    return view('user-checklist', compact('checklists', 'tasks'));
+
   }
   // Create new checklist
   public function create() {
