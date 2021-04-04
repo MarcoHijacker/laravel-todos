@@ -113,6 +113,8 @@ ul.navbar-nav {
 .task-creation {
     display: block;
     text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
 }
 
 .new-task-module {
@@ -123,4 +125,7 @@ ul.navbar-nav {
     .hidden {
         display: none;
     }
+}
+.tasks-table {
+    margin-top: 20px;
 }

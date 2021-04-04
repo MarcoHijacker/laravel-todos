@@ -2175,6 +2175,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2187,8 +2192,11 @@ __webpack_require__.r(__webpack_exports__);
       title: "Head",
       tasks: {},
       addingTask: {
+        status: 0,
+        priority: 1,
         checklist_id: this.checklist
-      }
+      },
+      formVisible: false
     };
   },
   props: {
@@ -2217,7 +2225,9 @@ __webpack_require__.r(__webpack_exports__);
           var data = _ref3.data;
           return _this2.tasks = data;
         })["finally"](function () {
-          return console.log("Tasks Data loading completed.");
+          console.log("Tasks Data loading completed.");
+
+          _this2.resetForm();
         });
       });
     },
@@ -2230,6 +2240,16 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         return console.log("Tasks Data loading completed.");
       });
+    },
+    resetForm: function resetForm() {
+      this.addingTask = {
+        name: '',
+        status: '',
+        priority: ''
+      };
+    },
+    toggleForm: function toggleForm() {
+      this.formVisible = !this.formVisible;
     }
   }
 });
@@ -38111,186 +38131,237 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "new-task-module" }, [
-      _c("div", { staticClass: "box" }, [
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.addingTask.name,
-              expression: "addingTask.name"
-            }
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.addingTask.name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.addingTask, "name", $event.target.value)
-            }
+    _c(
+      "a",
+      {
+        staticClass: "task-creation",
+        attrs: { href: "#" },
+        on: {
+          click: function($event) {
+            return _vm.toggleForm()
           }
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-plus-square",
+          attrs: { "aria-hidden": "true" }
         }),
-        _c("br")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box" }, [
-        _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.addingTask.description,
-              expression: "addingTask.description"
-            }
-          ],
-          staticClass: "desc-input",
-          attrs: { type: "text" },
-          domProps: { value: _vm.addingTask.description },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.addingTask, "description", $event.target.value)
-            }
-          }
-        }),
-        _c("br")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box" }, [
-        _c("label", { attrs: { for: "status" } }, [_vm._v("Status: ")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.addingTask.status,
-                expression: "addingTask.status"
-              }
-            ],
-            attrs: { name: "status" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.addingTask,
-                  "status",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
-              }
-            }
-          },
-          [
-            _c("option", { attrs: { value: "0", selected: "" } }, [
-              _vm._v("Undone")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [_vm._v("Done")])
-          ]
-        ),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "priority" } }, [_vm._v("Priority: ")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.addingTask.priority,
-                expression: "addingTask.priority"
-              }
-            ],
-            attrs: { name: "priority" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.addingTask,
-                  "priority",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
-              }
-            }
-          },
-          [
-            _c("option", { attrs: { value: "2" } }, [_vm._v("High")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [_vm._v("Middle")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "0" } }, [_vm._v("Low")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box hidden" }, [
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Checklist ID")]),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "text", disabled: "" },
-          domProps: { value: _vm.checklist }
-        }),
-        _c("br")
-      ])
-    ]),
+        _vm._v(" Create new Task")
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
       {
-        staticClass: "box",
-        staticStyle: { "text-align": "center", margin: "5px 0" }
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.formVisible,
+            expression: "formVisible"
+          }
+        ],
+        staticClass: "new-task-module"
       },
       [
-        _c(
-          "button",
-          {
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "box form-group" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.addingTask.name,
+                expression: "addingTask.name"
+              }
+            ],
+            attrs: { type: "text", name: "name" },
+            domProps: { value: _vm.addingTask.name },
             on: {
-              click: function($event) {
-                return _vm.storeTask()
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.addingTask, "name", $event.target.value)
               }
             }
+          }),
+          _c("br")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box form-group" }, [
+          _c("label", { attrs: { for: "description" } }, [
+            _vm._v("Description")
+          ]),
+          _c("br"),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.addingTask.description,
+                expression: "addingTask.description"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { rows: "2", name: "description" },
+            domProps: { value: _vm.addingTask.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.addingTask, "description", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("br")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box form-group" }, [
+          _c("label", { attrs: { for: "status" } }, [_vm._v("Status: ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.addingTask.status,
+                  expression: "addingTask.status"
+                }
+              ],
+              attrs: { name: "status" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.addingTask,
+                    "status",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Undone")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("Done")])
+            ]
+          ),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "priority" } }, [_vm._v("Priority: ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.addingTask.priority,
+                  expression: "addingTask.priority"
+                }
+              ],
+              attrs: { name: "priority" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.addingTask,
+                    "priority",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "2" } }, [_vm._v("High")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("Middle")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Low")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box form-group hidden" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Checklist ID")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "text", disabled: "" },
+            domProps: { value: _vm.checklist }
+          }),
+          _c("br")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "box",
+            staticStyle: { "text-align": "center", margin: "20px 0" }
           },
-          [_vm._v("\n            Push in DB\n        ")]
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: {
+                  click: function($event) {
+                    return _vm.storeTask()
+                  }
+                }
+              },
+              [_vm._v("\n                Push in DB\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-light",
+                on: {
+                  click: function($event) {
+                    return _vm.resetForm()
+                  }
+                }
+              },
+              [_vm._v("\n                Reset form\n            ")]
+            ),
+            _vm._v(" "),
+            _c("hr")
+          ]
         )
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "row justify-content-center tasks-table" }, [
       _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "bd-example" }, [
           _c("table", { staticClass: "table" }, [
-            _vm._m(1),
+            _vm._m(0),
             _vm._v(" "),
             _c(
               "tbody",
@@ -38310,18 +38381,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "task-creation", attrs: { href: "" } }, [
-      _c("i", {
-        staticClass: "fa fa-plus-square",
-        attrs: { "aria-hidden": "true" }
-      }),
-      _vm._v(" Create new\n        Task")
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
