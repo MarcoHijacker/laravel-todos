@@ -49,7 +49,7 @@
             <div class="col-md-12">
                 <div class="bd-example">
                     <table class="table">
-                        <thead class="table-dark">
+                        <thead class="table-light">
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>

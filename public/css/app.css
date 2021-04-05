@@ -14119,3 +14119,27 @@ ul.navbar-nav li.nav-item.add-list a {
   margin-top: 20px;
 }
 
+.checklist-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checklist-content .checklist-info .checklist-field {
+  font-weight: bold;
+}
+
+table.table i.fa-pencil {
+  color: #3490dc;
+  font-size: 20px;
+}
+
+table.table i.fa-trash {
+  color: red;
+  font-size: 20px;
+}
+
+table.table i.fa-check {
+  color: green;
+  font-size: 20px;
+}
+

@@ -19,6 +19,12 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+import VueEllipseProgress from 'vue-ellipse-progress';
+
+Vue.use(VueEllipseProgress);
+
+// Vue.use(VueEllipseProgress, "vep"); you can define a name and use the plugin like <vep/>
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('task-list', require('./components/TaskList.vue').default);
 Vue.component("single-task", require("./components/SingleTask.vue").default);
