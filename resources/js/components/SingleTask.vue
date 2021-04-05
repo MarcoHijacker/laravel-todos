@@ -26,11 +26,10 @@
         </td>
         <td>
             <input
-                type="text"
+                type="checkbox"
                 name="pin"
-                maxlength="1"
-                size="1"
-                v-model="task.status"
+                :checked="task.status === 1"
+                @change="changeStatus"
                 :disabled="isDisabled"
             />
         </td>
@@ -64,6 +63,7 @@ export default {
             trash: {},
             isDisabled: true,
             isIconVisible: false,
+            //isStatusChecked: false
         };
     },
     props: {
@@ -95,6 +95,13 @@ export default {
         unlockEditActions() {
             this.isDisabled = !this.isDisabled;
             this.isIconVisible = !this.isIconVisible;
+        },
+        changeStatus() {
+            if (this.task.status === 0) {
+                return this.task.status = 1;
+            } else {
+                return this.task.status = 0;
+            }
         }
     }
 };

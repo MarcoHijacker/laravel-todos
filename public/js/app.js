@@ -2044,7 +2044,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2052,7 +2051,8 @@ __webpack_require__.r(__webpack_exports__);
       title: "Head",
       trash: {},
       isDisabled: true,
-      isIconVisible: false
+      isIconVisible: false //isStatusChecked: false
+
     };
   },
   props: {
@@ -2086,6 +2086,13 @@ __webpack_require__.r(__webpack_exports__);
     unlockEditActions: function unlockEditActions() {
       this.isDisabled = !this.isDisabled;
       this.isIconVisible = !this.isIconVisible;
+    },
+    changeStatus: function changeStatus() {
+      if (this.task.status === 0) {
+        return this.task.status = 1;
+      } else {
+        return this.task.status = 0;
+      }
     }
   }
 });
@@ -2244,8 +2251,10 @@ __webpack_require__.r(__webpack_exports__);
     resetForm: function resetForm() {
       this.addingTask = {
         name: '',
-        status: '',
-        priority: ''
+        description: '',
+        status: 0,
+        priority: 1,
+        checklist_id: this.checklist
       };
     },
     toggleForm: function toggleForm() {
@@ -38055,30 +38064,9 @@ var render = function() {
     _vm._v(" "),
     _c("td", [
       _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.task.status,
-            expression: "task.status"
-          }
-        ],
-        attrs: {
-          type: "text",
-          name: "pin",
-          maxlength: "1",
-          size: "1",
-          disabled: _vm.isDisabled
-        },
-        domProps: { value: _vm.task.status },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.task, "status", $event.target.value)
-          }
-        }
+        attrs: { type: "checkbox", name: "pin", disabled: _vm.isDisabled },
+        domProps: { checked: _vm.task.status === 1 },
+        on: { change: _vm.changeStatus }
       })
     ]),
     _vm._v(" "),
@@ -38369,7 +38357,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center tasks-table" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "bd-example" }, [
+        _c("div", { staticClass: "table-responsive" }, [
           _c("table", { staticClass: "table" }, [
             _vm._m(0),
             _vm._v(" "),
@@ -50897,8 +50885,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\myprojects\laravel-todos\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\myprojects\laravel-todos\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/gianluca/Desktop/my_laravel/laravel-todos-clone/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/gianluca/Desktop/my_laravel/laravel-todos-clone/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
