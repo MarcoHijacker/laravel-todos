@@ -47,7 +47,7 @@
         </div>
         <div class="row justify-content-center tasks-table">
             <div class="col-md-12">
-                <div class="bd-example">
+                <div class="table-responsive">
                     <table class="table">
                         <thead class="table-dark">
                             <tr>
@@ -128,8 +128,10 @@ export default {
         resetForm() {
             this.addingTask = {
                 name: '',
-                status: '',
-                priority: ''
+                description: '',
+                status: 0,
+                priority: 1,
+                checklist_id: this.checklist
             }
         },
         toggleForm() {
