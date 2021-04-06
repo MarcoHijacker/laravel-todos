@@ -15,14 +15,11 @@
             />
         </td>
         <td>
-            <input
-                type="text"
-                name="pin"
-                maxlength="1"
-                size="1"
-                v-model="task.priority"
-                :disabled="isDisabled"
-            />
+            <select name="priority" :disabled="isDisabled" v-model="task.priority"> 
+                <option value="2">High</option>
+                <option value="1">Middle</option>
+                <option value="0">Low</option>
+            </select>
         </td>
         <td>
             <input
@@ -43,6 +40,7 @@
                 @click="deleteTask(task.id)"
                 class="fa fa-trash"
                 aria-hidden="true"
+                v-show="isDisabled"
             ></i>
             <i
                 @click="editTask(task.id)"
@@ -63,7 +61,6 @@ export default {
             trash: {},
             isDisabled: true,
             isIconVisible: false,
-            //isStatusChecked: false
         };
     },
     props: {

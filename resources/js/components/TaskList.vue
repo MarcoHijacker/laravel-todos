@@ -1,50 +1,55 @@
 <template>
     <div class="container">
-        <a @click="toggleForm()" class="task-creation" href="#"><i class="fa fa-plus-square" aria-hidden="true"></i> Create new Task</a>
-        <div v-show="formVisible" class="new-task-module">
-        <hr>
-            <div class="box form-group">
-                <label for="name">Name</label><br />
-                <input type="text" name="name" v-model="addingTask.name" /><br />
-            </div>
-            <div class="box form-group">
-                <label for="description">Description</label><br />
-                <textarea 
-                    rows="2"
-                    cols="40"
-                    name="description"
-                    v-model="addingTask.description"
-                    >
-                </textarea>
-                <br />
-            </div>
-            <div class="box form-group">
-                <label for="status">Status: </label>
-                <select name="status" v-model="addingTask.status">
-                    <option value="0">Undone</option>
-                    <option value="1">Done</option>
-                </select>
-                <label for="priority">Priority: </label>
-                <select name="priority" v-model="addingTask.priority">
-                    <option value="2">High</option>
-                    <option value="1">Middle</option>
-                    <option value="0">Low</option>
-                </select>
-            </div>
-            <div class="box form-group hidden">
-                <label for="name">Checklist ID</label><br />
-                <input type="text" :value="checklist" disabled /><br />
-            </div>
-            <div class="box" style="text-align: center; margin: 20px 0;">
-                <button class="btn btn-success" @click="storeTask()">
-                    Push in DB
-                </button>
-                <button class="btn btn-light" @click="resetForm()">
-                    Reset form
-                </button>
-                <hr>
-            </div>
+        <div class="text-center">
+            <a v-if="!formVisible" @click="toggleForm()" class="task-creation" href="#"><i class="fa fa-plus-square" aria-hidden="true"></i> Create new Task</a>
+            <a v-else @click="toggleForm()" class="task-creation" href="#"><i class="fa fa-minus-square" aria-hidden="true"></i> Create new Task</a>
         </div>
+        <transition name="list">
+            <div v-show="formVisible" class="new-task-module">
+            <hr>
+                <div class="box form-group">
+                    <label for="name">Name</label><br />
+                    <input type="text" name="name" v-model="addingTask.name" /><br />
+                </div>
+                <div class="box form-group">
+                    <label for="description">Description</label><br />
+                    <textarea 
+                        rows="2"
+                        cols="40"
+                        name="description"
+                        v-model="addingTask.description"
+                        >
+                    </textarea>
+                    <br />
+                </div>
+                <div class="box form-group">
+                    <label for="status">Status: </label>
+                    <select name="status" v-model="addingTask.status">
+                        <option value="0">Undone</option>
+                        <option value="1">Done</option>
+                    </select>
+                    <label for="priority">Priority: </label>
+                    <select name="priority" v-model="addingTask.priority">
+                        <option value="2">High</option>
+                        <option value="1">Middle</option>
+                        <option value="0">Low</option>
+                    </select>
+                </div>
+                <div class="box form-group hidden">
+                    <label for="name">Checklist ID</label><br />
+                    <input type="text" :value="checklist" disabled /><br />
+                </div>
+                <div class="box" style="text-align: center; margin: 20px 0;">
+                    <button class="btn btn-success" @click="storeTask()">
+                        Push in DB
+                    </button>
+                    <button class="btn btn-light" @click="resetForm()">
+                        Reset form
+                    </button>
+                    <hr>
+                </div>
+            </div>
+        </transition>
         <div class="row justify-content-center tasks-table">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -140,3 +145,13 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+    .list-enter-active, .list-leave-active {
+        transition: all 0.5s;
+    }
+    .list-enter, .list-leave-to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+</style>
