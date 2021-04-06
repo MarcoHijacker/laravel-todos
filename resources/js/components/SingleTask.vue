@@ -59,8 +59,7 @@ export default {
             title: "Head",
             trash: {},
             isDisabled: true,
-            isIconActive: false,
-            //isStatusChecked: false
+            isIconVisible: false,
         };
     },
     props: {
