@@ -14083,8 +14083,6 @@ ul.navbar-nav li.nav-item.add-list a {
 }
 
 .task-creation {
-  display: block;
-  text-align: center;
   text-decoration: none !important;
   cursor: pointer;
 }
