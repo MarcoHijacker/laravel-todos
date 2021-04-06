@@ -45,9 +45,8 @@
                 aria-hidden="true"
             ></i>
             <i
-                @click="editTask(task.id)"
-                v-show="isIconVisible"
-                class="fa fa-check"
+                @click="editTask(isIconActive, task.id)"
+                :class="['fa fa-check', isIconActive ? '' : 'deniedAct']"
                 aria-hidden="true"
             ></i>
         </td>
@@ -62,7 +61,7 @@ export default {
             title: "Head",
             trash: {},
             isDisabled: true,
-            isIconVisible: false,
+            isIconActive: false,
             //isStatusChecked: false
         };
     },
@@ -81,20 +80,21 @@ export default {
                     this.$emit("upd-tasks");
                 });
         },
-        editTask(id) {
-
-            axios
-                .post("http://127.0.0.1:8000/api/tasks/" + id, this.task)
-                .then(({ data }) => console.log(data))
-                .finally(() => {
-                    this.$emit("upd-tasks");
-                    this.unlockEditActions();
-                    console.log("Task " + id + " updated in DB!");
-                });
+        editTask(isIconActive, id) {
+            if(isIconActive) {
+                axios
+                    .post("http://127.0.0.1:8000/api/tasks/" + id, this.task)
+                    .then(({ data }) => console.log(data))
+                    .finally(() => {
+                        this.$emit("upd-tasks");
+                        this.unlockEditActions();
+                        console.log("Task " + id + " updated in DB!");
+                    });
+            }
         },
         unlockEditActions() {
             this.isDisabled = !this.isDisabled;
-            this.isIconVisible = !this.isIconVisible;
+            this.isIconActive = !this.isIconActive;
         },
         changeStatus() {
             if (this.task.status === 0) {

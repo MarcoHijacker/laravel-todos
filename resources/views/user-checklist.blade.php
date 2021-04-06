@@ -32,34 +32,7 @@
                           <p>Overall Tasks: <span class="checklist-field"> {{ $tasks->where('checklist_id', $checklist -> id)->count() }} </span></p>
                         </div>
                         <div class="checklist-bar">
-                          <vue-ellipse-progress 
-                            :data="circles"                    
-                            :progress="100 * {{ $tasks->where('checklist_id', $checklist -> id)->where('status', 1)->count() }} / {{ $tasks->where('checklist_id', $checklist -> id)->count() }}"
-                            :angle="-90"
-                            color="#38c172"
-                            :colorFill="colorFillGradient"
-                            emptyColor="#8ec5fc"
-                            :emptyColorFill="emptyColorFillGradient"                      
-                            :size="110"
-                            :thickness="3"
-                            emptyThickness="10%"
-                            lineMode="in 10"
-                            :legend="true"
-                            :legendValue="180"
-                            legendClass="legend-custom-style"
-                            dash="60 0.9"
-                            animation="reverse 700 400"
-                            :noData="false"
-                            :loading="false"                      
-                            fontColor="white"
-                            :half="false"
-                            :gap="10"
-                            dot="10 #38c172"
-                            fontSize="5rem">
-                            
-                            <span slot="legend-value">%</span>
-                            <p slot="legend-caption">COMPLETE</p> 
-                          </vue-ellipse-progress>
+                          
                         </div>
                       </div>
                     </div>

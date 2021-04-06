@@ -2043,7 +2043,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2051,7 +2050,7 @@ __webpack_require__.r(__webpack_exports__);
       title: "Head",
       trash: {},
       isDisabled: true,
-      isIconVisible: false //isStatusChecked: false
+      isIconActive: false //isStatusChecked: false
 
     };
   },
@@ -2069,23 +2068,25 @@ __webpack_require__.r(__webpack_exports__);
         _this.$emit("upd-tasks");
       });
     },
-    editTask: function editTask(id) {
+    editTask: function editTask(isIconActive, id) {
       var _this2 = this;
 
-      axios.post("http://127.0.0.1:8000/api/tasks/" + id, this.task).then(function (_ref) {
-        var data = _ref.data;
-        return console.log(data);
-      })["finally"](function () {
-        _this2.$emit("upd-tasks");
+      if (isIconActive) {
+        axios.post("http://127.0.0.1:8000/api/tasks/" + id, this.task).then(function (_ref) {
+          var data = _ref.data;
+          return console.log(data);
+        })["finally"](function () {
+          _this2.$emit("upd-tasks");
 
-        _this2.unlockEditActions();
+          _this2.unlockEditActions();
 
-        console.log("Task " + id + " updated in DB!");
-      });
+          console.log("Task " + id + " updated in DB!");
+        });
+      }
     },
     unlockEditActions: function unlockEditActions() {
       this.isDisabled = !this.isDisabled;
-      this.isIconVisible = !this.isIconVisible;
+      this.isIconActive = !this.isIconActive;
     },
     changeStatus: function changeStatus() {
       if (this.task.status === 0) {
@@ -38088,19 +38089,11 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("i", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isIconVisible,
-            expression: "isIconVisible"
-          }
-        ],
-        staticClass: "fa fa-check",
+        class: ["fa fa-check", _vm.isIconActive ? "" : "deniedAct"],
         attrs: { "aria-hidden": "true" },
         on: {
           click: function($event) {
-            return _vm.editTask(_vm.task.id)
+            return _vm.editTask(_vm.isIconActive, _vm.task.id)
           }
         }
       })
@@ -50885,8 +50878,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/gianluca/Desktop/my_laravel/laravel-todos-clone/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/gianluca/Desktop/my_laravel/laravel-todos-clone/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\myprojects\laravel-todos\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\myprojects\laravel-todos\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

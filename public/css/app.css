@@ -14143,3 +14143,7 @@ table.table i.fa-check {
   font-size: 20px;
 }
 
+table.table .deniedAct {
+  color: lightgrey !important;
+}
+

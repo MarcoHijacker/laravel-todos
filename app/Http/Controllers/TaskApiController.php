@@ -15,7 +15,7 @@ class TaskApiController extends Controller
 
     public function related($chk_id) {
 
-        return Task::all() -> where('checklist_id', $chk_id);
+        return Task::orderBy('created_at','desc') -> where('checklist_id', $chk_id) -> get();
 
     }
 
