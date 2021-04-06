@@ -2,10 +2,7 @@
     <tr>
         <th scope="row">{{ task.id }}</th>
         <td>
-            <input type="text" 
-                   v-model="task.name"
-                   :disabled="isDisabled"
-            />
+            <input type="text" v-model="task.name" :disabled="isDisabled" />
         </td>
         <td>
             <input
@@ -15,7 +12,11 @@
             />
         </td>
         <td>
-            <select name="priority" :disabled="isDisabled" v-model="task.priority"> 
+            <select
+                name="priority"
+                :disabled="isDisabled"
+                v-model="task.priority"
+            >
                 <option value="2">High</option>
                 <option value="1">Middle</option>
                 <option value="0">Low</option>
@@ -32,15 +33,16 @@
         </td>
         <td class="action-icons">
             <i
-                @click="unlockEditActions"
-                class="fa fa-pencil"
-                aria-hidden="true"
-            ></i>
-            <i
                 @click="deleteTask(task.id)"
                 class="fa fa-trash"
                 aria-hidden="true"
-                v-show="isDisabled"
+            ></i>
+        </td>
+        <td class="action-icons">
+            <i
+                @click="unlockEditActions"
+                class="fa fa-pencil"
+                aria-hidden="true"
             ></i>
             <i
                 @click="editTask(isIconActive, task.id)"
@@ -60,6 +62,7 @@ export default {
             trash: {},
             isDisabled: true,
             isIconVisible: false,
+            isIconActive: false
         };
     },
     props: {
@@ -67,18 +70,20 @@ export default {
     },
     methods: {
         deleteTask(id) {
-            axios
-                .delete("http://127.0.0.1:8000/api/tasks/" + id)
-                .then(response => {
-                    this.trash = response.data;
-                    console.log(this.trash);
-                })
-                .finally(() => {
-                    this.$emit("upd-tasks");
-                });
+            if(confirm('This will perform permanent deletion. Are you sure?')) {
+                axios
+                    .delete("http://127.0.0.1:8000/api/tasks/" + id)
+                    .then(response => {
+                        this.trash = response.data;
+                        console.log(this.trash);
+                    })
+                    .finally(() => {
+                        this.$emit("upd-tasks");
+                    });
+            }
         },
         editTask(isIconActive, id) {
-            if(isIconActive) {
+            if (isIconActive) {
                 axios
                     .post("http://127.0.0.1:8000/api/tasks/" + id, this.task)
                     .then(({ data }) => console.log(data))
@@ -95,9 +100,9 @@ export default {
         },
         changeStatus() {
             if (this.task.status === 0) {
-                return this.task.status = 1;
+                return (this.task.status = 1);
             } else {
-                return this.task.status = 0;
+                return (this.task.status = 0);
             }
         }
     }

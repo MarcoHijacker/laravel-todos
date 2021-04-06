@@ -2042,6 +2042,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2049,7 +2050,8 @@ __webpack_require__.r(__webpack_exports__);
       title: "Head",
       trash: {},
       isDisabled: true,
-      isIconVisible: false
+      isIconVisible: false,
+      isIconActive: false
     };
   },
   props: {
@@ -2059,12 +2061,14 @@ __webpack_require__.r(__webpack_exports__);
     deleteTask: function deleteTask(id) {
       var _this = this;
 
-      axios["delete"]("http://127.0.0.1:8000/api/tasks/" + id).then(function (response) {
-        _this.trash = response.data;
-        console.log(_this.trash);
-      })["finally"](function () {
-        _this.$emit("upd-tasks");
-      });
+      if (confirm('This will perform permanent deletion. Are you sure?')) {
+        axios["delete"]("http://127.0.0.1:8000/api/tasks/" + id).then(function (response) {
+          _this.trash = response.data;
+          console.log(_this.trash);
+        })["finally"](function () {
+          _this.$emit("upd-tasks");
+        });
+      }
     },
     editTask: function editTask(isIconActive, id) {
       var _this2 = this;
@@ -2110,6 +2114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _SingleTask_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SingleTask.vue */ "./resources/js/components/SingleTask.vue");
+//
 //
 //
 //
@@ -38733,20 +38738,6 @@ var render = function() {
     _vm._v(" "),
     _c("td", { staticClass: "action-icons" }, [
       _c("i", {
-        staticClass: "fa fa-pencil",
-        attrs: { "aria-hidden": "true" },
-        on: { click: _vm.unlockEditActions }
-      }),
-      _vm._v(" "),
-      _c("i", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isDisabled,
-            expression: "isDisabled"
-          }
-        ],
         staticClass: "fa fa-trash",
         attrs: { "aria-hidden": "true" },
         on: {
@@ -38754,6 +38745,14 @@ var render = function() {
             return _vm.deleteTask(_vm.task.id)
           }
         }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "action-icons" }, [
+      _c("i", {
+        staticClass: "fa fa-pencil",
+        attrs: { "aria-hidden": "true" },
+        on: { click: _vm.unlockEditActions }
       }),
       _vm._v(" "),
       _c("i", {
@@ -39090,6 +39089,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Priority")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Delete")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
       ])
@@ -51273,8 +51274,10 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-ellipse-progress */ "./node_modules/vue-ellipse-progress/dist/vue-ellipse-progress.umd.min.js");
-/* harmony import */ var vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-ellipse-progress */ "./node_modules/vue-ellipse-progress/dist/vue-ellipse-progress.umd.min.js");
+/* harmony import */ var vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -51283,6 +51286,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -51294,18 +51298,18 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-Vue.use(vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_0___default.a); // Vue.use(VueEllipseProgress, "vep"); you can define a name and use the plugin like <vep/>
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_1___default.a); // Vue.use(VueEllipseProgress, "vep"); you can define a name and use the plugin like <vep/>
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-Vue.component('task-list', __webpack_require__(/*! ./components/TaskList.vue */ "./resources/js/components/TaskList.vue")["default"]);
-Vue.component("single-task", __webpack_require__(/*! ./components/SingleTask.vue */ "./resources/js/components/SingleTask.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('task-list', __webpack_require__(/*! ./components/TaskList.vue */ "./resources/js/components/TaskList.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('single-task', __webpack_require__(/*! ./components/SingleTask.vue */ "./resources/js/components/SingleTask.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app'
 });
 

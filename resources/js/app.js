@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import Vue from 'vue';
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -27,8 +28,7 @@ Vue.use(VueEllipseProgress);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('task-list', require('./components/TaskList.vue').default);
-Vue.component("single-task", require("./components/SingleTask.vue").default);
-
+Vue.component('single-task', require('./components/SingleTask.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

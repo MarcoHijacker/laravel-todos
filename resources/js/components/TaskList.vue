@@ -61,6 +61,7 @@
                                 <th scope="col">Description</th>
                                 <th scope="col">Priority</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Delete</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>

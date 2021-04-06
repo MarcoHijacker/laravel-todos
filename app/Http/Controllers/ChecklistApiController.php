@@ -13,6 +13,17 @@ class ChecklistApiController extends Controller
 
     }
 
+    public function related() {
+
+        $user_id = request('user_id');
+        if($user_id) {
+            return Checklist::orderBy('created_at','desc') -> where('user_id', $user_id) -> get();
+        } else {
+            return 'Error. Invalid User Id!';
+        }
+
+    }
+
     public function create() {
 
         request() -> validate([

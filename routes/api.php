@@ -23,6 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // CHECKLIST API:
 // INDEX
 Route::get('/checklists', [ChecklistApiController::class, 'index']);
+// BOUNDED INDEX
+Route::post('/checklists/user', [ChecklistApiController::class, 'related']);
 // CREATE
 Route::post('/checklists', [ChecklistApiController::class, 'create']);
 // UPDATE
