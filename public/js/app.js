@@ -2051,7 +2051,8 @@ __webpack_require__.r(__webpack_exports__);
       trash: {},
       isDisabled: true,
       isIconVisible: false,
-      isIconActive: false
+      isIconActive: false,
+      newMove: ''
     };
   },
   props: {
@@ -2066,7 +2067,11 @@ __webpack_require__.r(__webpack_exports__);
           _this.trash = response.data;
           console.log(_this.trash);
         })["finally"](function () {
+          _this.newMove = 'Deleted Task ID ' + id;
+
           _this.$emit("upd-tasks");
+
+          _this.$emit("new-move", _this.newMove);
         });
       }
     },
@@ -2078,11 +2083,13 @@ __webpack_require__.r(__webpack_exports__);
           var data = _ref.data;
           return console.log(data);
         })["finally"](function () {
+          _this2.newMove = 'Edited Task ID ' + id;
+
           _this2.$emit("upd-tasks");
 
-          _this2.unlockEditActions();
+          _this2.$emit("new-move", _this2.newMove);
 
-          console.log("Task " + id + " updated in DB!");
+          _this2.unlockEditActions();
         });
       }
     },
@@ -2196,6 +2203,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2212,7 +2226,8 @@ __webpack_require__.r(__webpack_exports__);
         priority: 1,
         checklist_id: this.checklist
       },
-      formVisible: false
+      formVisible: false,
+      lastUpdate: 'Tasks loaded!'
     };
   },
   props: {
@@ -2237,6 +2252,7 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(data);
       })["finally"](function () {
         console.log("Task added in DB.");
+        _this2.lastUpdate = 'New task added!';
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/tasks/" + _this2.checklist).then(function (_ref3) {
           var data = _ref3.data;
           return _this2.tasks = data;
@@ -2268,6 +2284,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     toggleForm: function toggleForm() {
       this.formVisible = !this.formVisible;
+    },
+    newMove: function newMove(childOutput) {
+      this.lastUpdate = childOutput;
     }
   }
 });
@@ -38638,7 +38657,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("tr", [
+  return _c("tr", { staticClass: "content-row" }, [
     _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.task.id))]),
     _vm._v(" "),
     _c("td", [
@@ -38833,6 +38852,16 @@ var render = function() {
                 _vm._v(" Create new Task")
               ]
             )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "console-wrap" }, [
+        _c("div", { staticClass: "console-track" }, [
+          _c("b", [_vm._v("$")]),
+          _vm._v(" Last update> "),
+          _c("span", { attrs: { id: "command-line" } }, [
+            _vm._v(" " + _vm._s(_vm.lastUpdate) + " ")
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("transition", { attrs: { name: "list" } }, [
@@ -39060,7 +39089,7 @@ var render = function() {
                   return _c("single-task", {
                     key: "tsk" + index,
                     attrs: { task: task },
-                    on: { "upd-tasks": _vm.updTasks }
+                    on: { "upd-tasks": _vm.updTasks, "new-move": _vm.newMove }
                   })
                 }),
                 1
@@ -39079,7 +39108,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-light" }, [
-      _c("tr", [
+      _c("tr", { staticClass: "top-row" }, [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),

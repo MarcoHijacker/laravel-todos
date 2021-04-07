@@ -4,6 +4,11 @@
             <a v-if="!formVisible" @click="toggleForm()" class="task-creation" href="#"><i class="fa fa-plus-square" aria-hidden="true"></i> Create new Task</a>
             <a v-else @click="toggleForm()" class="task-creation" href="#"><i class="fa fa-minus-square" aria-hidden="true"></i> Create new Task</a>
         </div>
+        <div class="console-wrap">
+            <div class="console-track">
+                <b>$</b> Last update> <span id="command-line"> {{ lastUpdate }} </span>
+            </div>
+        </div>
         <transition name="list">
             <div v-show="formVisible" class="new-task-module">
             <hr>
@@ -50,12 +55,13 @@
                 </div>
             </div>
         </transition>
+
         <div class="row justify-content-center tasks-table">
             <div class="col-md-12">
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="table-light">
-                            <tr>
+                            <tr class="top-row">
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
@@ -71,6 +77,7 @@
                                 :key="`tsk${index}`"
                                 :task="task"
                                 @upd-tasks="updTasks"
+                                @new-move="newMove"
                             />
                         </tbody>
                     </table>
@@ -95,7 +102,8 @@ export default {
                 priority: 1,
                 checklist_id: this.checklist
             },
-            formVisible: false
+            formVisible: false,
+            lastUpdate: 'Tasks loaded!',
         };
     },
     props: {
@@ -114,6 +122,7 @@ export default {
                 .then(({ data }) => console.log(data))
                 .finally(() => {
                     console.log("Task added in DB.");
+                    this.lastUpdate = 'New task added!';
                     axios
                         .get(
                             "http://127.0.0.1:8000/api/tasks/" + this.checklist
@@ -142,6 +151,9 @@ export default {
         },
         toggleForm() {
             this.formVisible = !this.formVisible;
+        },
+        newMove(childOutput) {
+            this.lastUpdate = childOutput;
         }
     }
 };

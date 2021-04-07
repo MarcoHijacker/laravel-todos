@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr class="content-row">
         <th scope="row">{{ task.id }}</th>
         <td>
             <input type="text" v-model="task.name" :disabled="isDisabled" />
@@ -62,7 +62,8 @@ export default {
             trash: {},
             isDisabled: true,
             isIconVisible: false,
-            isIconActive: false
+            isIconActive: false,
+            newMove: '',
         };
     },
     props: {
@@ -78,7 +79,9 @@ export default {
                         console.log(this.trash);
                     })
                     .finally(() => {
+                        this.newMove = 'Deleted Task ID ' + id;
                         this.$emit("upd-tasks");
+                        this.$emit("new-move", this.newMove);
                     });
             }
         },
@@ -88,9 +91,10 @@ export default {
                     .post("http://127.0.0.1:8000/api/tasks/" + id, this.task)
                     .then(({ data }) => console.log(data))
                     .finally(() => {
+                        this.newMove = 'Edited Task ID ' + id;
                         this.$emit("upd-tasks");
+                        this.$emit("new-move", this.newMove);
                         this.unlockEditActions();
-                        console.log("Task " + id + " updated in DB!");
                     });
             }
         },

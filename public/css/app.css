@@ -14087,6 +14087,15 @@ ul.navbar-nav li.nav-item.add-list a {
   cursor: pointer;
 }
 
+.console-track {
+  background-color: #53585a;
+  color: #cef878;
+  border-radius: 5px;
+  border: solid 1px grey;
+  margin-top: 7px;
+  font-size: 12px;
+}
+
 .new-task-module {
   text-align: center;
 }
@@ -14143,5 +14152,24 @@ table.table i.fa-check {
 
 table.table .deniedAct {
   color: lightgrey !important;
+}
+
+tr.top-row > * {
+  text-align: center;
+}
+
+tr.content-row > * {
+  text-align: center;
+}
+
+div.console-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+div.console-wrap div.console-track {
+  width: 40%;
+  text-align: center;
 }
 
