@@ -13,7 +13,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Checklist CRUD
-Route::get('/index/checklist', 'ChecklistController@index') -> name('index-checklist');
 Route::get('/personal/checklist', 'ChecklistController@personal') -> name('user-checklist');
 Route::get('/create/checklist', 'ChecklistController@create') -> name('create-checklist');
 Route::get('/show/checklist/{id}', 'ChecklistController@show') -> name('show-checklist');

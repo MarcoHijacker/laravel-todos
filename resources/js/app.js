@@ -26,9 +26,11 @@ Vue.use(VueEllipseProgress);
 
 // Vue.use(VueEllipseProgress, "vep"); you can define a name and use the plugin like <vep/>
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('task-list', require('./components/TaskList.vue').default);
 Vue.component('single-task', require('./components/SingleTask.vue').default);
+Vue.component("single-checklist", require("./components/SingleChecklist.vue").default);
+Vue.component("checklist-list", require("./components/ChecklistList.vue").default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

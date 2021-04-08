@@ -13,13 +13,7 @@ class ChecklistController extends Controller
   public function __construct() {
     $this->middleware('auth');
   }
-  // Checklists index
-  public function index() {
-
-    $checklists = Checklist::all();
-    return view('index-checklist', compact('checklists'));
-
-  }
+  
   // Personal Iser checklists
     public function personal() {
 
