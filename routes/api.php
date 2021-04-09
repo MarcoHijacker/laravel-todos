@@ -37,9 +37,12 @@ Route::delete('/checklists/{id}', [ChecklistApiController::class, 'destroy']);
 Route::get('/tasks', [TaskApiController::class, 'index']);
 // BOUNDED INDEX
 Route::get('/tasks/{id}', [TaskApiController::class, 'related']);
+// TASKS BALANCE
+Route::get('/tasks/balance/{id}', [TaskApiController::class, 'balance']);
 // CREATE
 Route::post('/tasks', [TaskApiController::class, 'create']);
 // UPDATE
 Route::post('/tasks/{id}', [TaskApiController::class, 'update']);
 // DESTROY
 Route::delete('/tasks/{id}', [TaskApiController::class, 'destroy']);
+

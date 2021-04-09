@@ -19,6 +19,17 @@ class TaskApiController extends Controller
 
     }
 
+    public function balance($chk_id) {
+
+        $completedTasks = Task::all() -> where('checklist_id', $chk_id) -> where('status', 1) -> count();
+        $overallTasks = Task::all() -> where('checklist_id', $chk_id) -> count();
+
+        return [
+            'completed' => $completedTasks,
+            'overall' => $overallTasks
+        ];
+    }
+
     public function create() {
 
         request() -> validate([

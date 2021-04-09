@@ -77,7 +77,7 @@ export default {
         };
     },
     props: {
-        loggeduser: Number
+        loggeduser: Number,
     },
     mounted() {
         axios
@@ -99,15 +99,10 @@ export default {
                 .then(({ data }) => console.log(data))
                 .finally(() => {
                     console.log("Checklist added in DB.");
-                    axios
-                        .post(
-                            "http://127.0.0.1:8000/api/checklists/user/", this.relatedLists
-                        )
-                        .then(({ data }) => (this.checklists = data))
-                        .finally(() => {
-                            console.log("Checklist Data loading completed.");
-                            this.resetForm();
-                        });
+                    this.updChecklists();
+
+                    
+
                 });
         },
         resetForm() {
@@ -128,7 +123,15 @@ export default {
                 .finally(() => {
                     console.log('Checklist data loading completed.');
                 });
-        }
+        },
+        // updTasks() {
+        //     axios
+        //         .get("http://127.0.0.1:8000/api/tasks/" + )
+        //         .then(response => {
+        //             response.data;
+        //         })
+        //         .finally(() => console.log("Task upd completed"));
+        // }
     }
 };
 </script>

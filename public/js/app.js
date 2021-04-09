@@ -2060,14 +2060,8 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(data);
       })["finally"](function () {
         console.log("Checklist added in DB.");
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:8000/api/checklists/user/", _this2.relatedLists).then(function (_ref2) {
-          var data = _ref2.data;
-          return _this2.checklists = data;
-        })["finally"](function () {
-          console.log("Checklist Data loading completed.");
 
-          _this2.resetForm();
-        });
+        _this2.updChecklists();
       });
     },
     resetForm: function resetForm() {
@@ -2087,7 +2081,15 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         console.log('Checklist data loading completed.');
       });
-    }
+    } // updTasks() {
+    //     axios
+    //         .get("http://127.0.0.1:8000/api/tasks/" + )
+    //         .then(response => {
+    //             response.data;
+    //         })
+    //         .finally(() => console.log("Task upd completed"));
+    // }
+
   }
 });
 
@@ -2160,8 +2162,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      trash: {}
+      trash: {},
+      relatedTasks: {},
+      completedTasks: 0,
+      overallTasks: 0
     };
+  },
+  mounted: function mounted() {
+    this.getRelatedTasks();
   },
   props: {
     checklist: Object
@@ -2176,8 +2184,21 @@ __webpack_require__.r(__webpack_exports__);
           console.log(_this.trash);
         })["finally"](function () {
           _this.$emit("upd-checklists");
+
+          _this.getRelatedTasks();
         });
       }
+    },
+    getRelatedTasks: function getRelatedTasks() {
+      var _this2 = this;
+
+      axios.get("http://127.0.0.1:8000/api/tasks/balance/" + this.checklist.id).then(function (response) {
+        console.log(response.data);
+        _this2.completedTasks = response.data['completed'];
+        _this2.overallTasks = response.data['overall'];
+      })["finally"](function () {
+        console.log("Tasks Data loading completed. !!!!!");
+      });
     }
   }
 });
@@ -39178,9 +39199,31 @@ var render = function() {
               _vm._v("Description: " + _vm._s(_vm.checklist.description))
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("p", [
+              _vm._v(
+                "\n                    Completed Tasks:\n                    "
+              ),
+              _c("span", { staticClass: "checklist-field" }, [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.completedTasks) +
+                    "\n                    "
+                )
+              ])
+            ]),
             _vm._v(" "),
-            _vm._m(2)
+            _c("p", [
+              _vm._v(
+                "\n                    Overall Tasks:\n                    "
+              ),
+              _c("span", { staticClass: "checklist-field" }, [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.overallTasks) +
+                    "\n                    "
+                )
+              ])
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "checklist-bar" })
@@ -39202,24 +39245,6 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fa fa-pencil-square-o" }), _vm._v(" Edit")]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("\n                    Completed Tasks:\n                    "),
-      _c("span", { staticClass: "checklist-field" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("\n                    Overall Tasks:\n                    "),
-      _c("span", { staticClass: "checklist-field" })
-    ])
   }
 ]
 render._withStripped = true

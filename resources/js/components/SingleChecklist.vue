@@ -35,13 +35,13 @@
                     <p>
                         Completed Tasks:
                         <span class="checklist-field">
-                            
+                            {{ completedTasks }}
                         </span>
                     </p>
                     <p>
                         Overall Tasks:
                         <span class="checklist-field">
-                            
+                            {{ overallTasks }}
                         </span>
                     </p>
                 </div>
@@ -57,8 +57,14 @@
     export default {
         data() {
             return {
-                trash: {}
+                trash: {},
+                relatedTasks: {},
+                completedTasks: 0,
+                overallTasks: 0
             };
+        },
+        mounted() {
+            this.getRelatedTasks();
         },
         props: {
             checklist: Object
@@ -74,9 +80,24 @@
                         })
                         .finally(() => {
                             this.$emit("upd-checklists");
+                            this.getRelatedTasks();
                         });
                 }
             },
+            getRelatedTasks() {
+
+                axios
+                    .get("http://127.0.0.1:8000/api/tasks/balance/" + this.checklist.id)
+                    .then(response => {
+                        console.log(response.data);
+                        this.completedTasks = response.data['completed'];
+                        this.overallTasks = response.data['overall'];
+                    })
+                    .finally(() => {
+                        console.log("Tasks Data loading completed. !!!!!")
+                    });
+
+            }
         }
     }
 </script>
