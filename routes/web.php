@@ -12,6 +12,9 @@ Auth::routes();
 // Main pages
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Unathorized page
+Route::get('/unathorized', 'ChecklistController@unathorized') -> name('unathorized-user');
+
 // Checklist CRUD
 Route::get('/personal/checklist', 'ChecklistController@personal') -> name('user-checklist');
 Route::get('/create/checklist', 'ChecklistController@create') -> name('create-checklist');

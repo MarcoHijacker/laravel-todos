@@ -14,7 +14,7 @@ class ChecklistController extends Controller
     $this->middleware('auth');
   }
   
-  // Personal Iser checklists
+  // Personal User checklists
     public function personal() {
 
     $tasks = Task::all();
@@ -33,7 +33,11 @@ class ChecklistController extends Controller
   public function show($id) {
 
     $checklist = Checklist::findOrFail($id);
-    return view('show-checklist', compact('checklist'));
+    if ($checklist -> user_id == Auth::user() -> id) {
+      return view('show-checklist', compact('checklist'));
+    } else {
+      return redirect() -> route('unathorized-user');
+    }
 
   }
   // Store a new checklist
@@ -90,6 +94,13 @@ class ChecklistController extends Controller
 
     return redirect() -> route('index-checklist');
 
+  }
+
+  // Unathorized 
+
+  public function unathorized() {
+
+    return view('unathorized');
   }
 
 
