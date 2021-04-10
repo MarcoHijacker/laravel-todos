@@ -2150,8 +2150,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2259,8 +2257,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2311,16 +2307,32 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    statusTask: function statusTask(id) {
+      var _this3 = this;
+
+      axios.post("http://127.0.0.1:8000/api/tasks/" + id, this.task).then(function (_ref2) {
+        var data = _ref2.data;
+        return console.log(data);
+      })["finally"](function () {
+        _this3.newMove = 'Edited Task ID ' + id;
+
+        _this3.$emit("upd-tasks");
+
+        _this3.$emit("new-move", _this3.newMove);
+      });
+    },
     unlockEditActions: function unlockEditActions() {
       this.isDisabled = !this.isDisabled;
       this.isIconActive = !this.isIconActive;
     },
-    changeStatus: function changeStatus() {
+    changeStatus: function changeStatus(id) {
       if (this.task.status === 0) {
-        return this.task.status = 1;
+        this.task.status = 1;
       } else {
-        return this.task.status = 0;
+        this.task.status = 0;
       }
+
+      this.statusTask(id);
     }
   }
 });
@@ -2339,7 +2351,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _SingleTask_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SingleTask.vue */ "./resources/js/components/SingleTask.vue");
-//
 //
 //
 //
@@ -39145,35 +39156,17 @@ var render = function() {
     { staticClass: "card", staticStyle: { "margin-bottom": "20px" } },
     [
       _c("div", { staticClass: "card-header single-list checklist-item" }, [
-        _c("span", { staticClass: "checklist-title" }, [
-          _c("h2", [
-            _vm._v(
-              "\n               " +
-                _vm._s(_vm.checklist.name) +
-                "\n            "
-            )
-          ])
+        _c("div", { staticClass: "checklist-title" }, [
+          _vm._v(
+            "\n               " + _vm._s(_vm.checklist.name) + "\n        "
+          )
         ]),
         _vm._v(" "),
         _c("div", [
           _c(
             "a",
             {
-              staticClass: "btn btn-success btn-sm",
-              attrs: {
-                href: ["/show/checklist/" + _vm.checklist.id],
-                type: "button"
-              }
-            },
-            [_c("i", { staticClass: "fa fa-eye" }), _vm._v(" Open")]
-          ),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-danger btn-sm",
+              staticClass: "action-crud",
               attrs: { type: "button" },
               on: {
                 click: function($event) {
@@ -39181,7 +39174,21 @@ var render = function() {
                 }
               }
             },
-            [_c("i", { staticClass: "fa fa-trash-o" }), _vm._v(" Delete")]
+            [_c("i", { staticClass: "fa fa-trash" })]
+          ),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "action-crud",
+              attrs: {
+                href: ["/show/checklist/" + _vm.checklist.id],
+                type: "button"
+              }
+            },
+            [_c("i", { staticClass: "fa fa-eye" })]
           )
         ])
       ]),
@@ -39233,11 +39240,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "a",
-      {
-        staticClass: "btn btn-primary btn-sm",
-        attrs: { href: "", type: "button" }
-      },
-      [_c("i", { staticClass: "fa fa-pencil-square-o" }), _vm._v(" Edit")]
+      { staticClass: "action-crud", attrs: { href: "", type: "button" } },
+      [_c("i", { staticClass: "fa fa-pencil" })]
     )
   }
 ]
@@ -39263,7 +39267,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tr", { staticClass: "content-row" }, [
-    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.task.id))]),
+    _c("td", [
+      _c("input", {
+        attrs: { type: "checkbox", name: "pin" },
+        domProps: { checked: _vm.task.status === 1 },
+        on: {
+          change: function($event) {
+            return _vm.changeStatus(_vm.task.id)
+          }
+        }
+      })
+    ]),
     _vm._v(" "),
     _c("td", [
       _c("input", {
@@ -39350,14 +39364,6 @@ var render = function() {
           _c("option", { attrs: { value: "0" } }, [_vm._v("Low")])
         ]
       )
-    ]),
-    _vm._v(" "),
-    _c("td", [
-      _c("input", {
-        attrs: { type: "checkbox", name: "pin", disabled: _vm.isDisabled },
-        domProps: { checked: _vm.task.status === 1 },
-        on: { change: _vm.changeStatus }
-      })
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "action-icons" }, [
@@ -39714,15 +39720,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-light" }, [
       _c("tr", { staticClass: "top-row" }, [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Description")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Priority")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Delete")]),
         _vm._v(" "),

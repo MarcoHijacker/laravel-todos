@@ -1,6 +1,13 @@
 <template>
     <tr class="content-row">
-        <th scope="row">{{ task.id }}</th>
+        <td>
+            <input
+                type="checkbox"
+                name="pin"
+                :checked="task.status === 1"
+                @change="changeStatus(task.id)"
+            />
+        </td>
         <td>
             <input type="text" v-model="task.name" :disabled="isDisabled" />
         </td>
@@ -21,15 +28,6 @@
                 <option value="1">Middle</option>
                 <option value="0">Low</option>
             </select>
-        </td>
-        <td>
-            <input
-                type="checkbox"
-                name="pin"
-                :checked="task.status === 1"
-                @change="changeStatus"
-                :disabled="isDisabled"
-            />
         </td>
         <td class="action-icons">
             <i
@@ -98,16 +96,27 @@ export default {
                     });
             }
         },
+        statusTask(id) {
+            axios
+                .post("http://127.0.0.1:8000/api/tasks/" + id, this.task)
+                .then(({ data }) => console.log(data))
+                .finally(() => {
+                    this.newMove = 'Edited Task ID ' + id;
+                    this.$emit("upd-tasks");
+                    this.$emit("new-move", this.newMove);
+            });
+        },
         unlockEditActions() {
             this.isDisabled = !this.isDisabled;
             this.isIconActive = !this.isIconActive;
         },
-        changeStatus() {
+        changeStatus(id) {
             if (this.task.status === 0) {
-                return (this.task.status = 1);
+                this.task.status = 1;
             } else {
-                return (this.task.status = 0);
+                this.task.status = 0;
             }
+            this.statusTask(id);
         }
     }
 };

@@ -1,29 +1,27 @@
 <template>
     <div style="margin-bottom: 20px;" class="card">
         <div class="card-header single-list checklist-item">
-            <span class="checklist-title">
-                <h2>
+            <div class="checklist-title">
                    {{ checklist.name }}
-                </h2>
-            </span>
+            </div>
             <div>
                 <a
-                    :href="['/show/checklist/' + checklist.id]"
+                    @click="deleteChecklist(checklist.id)"
                     type="button"
-                    class="btn btn-success btn-sm"
-                    ><i class="fa fa-eye"></i> Open</a
+                    class="action-crud"
+                    ><i class="fa fa-trash"></i></a
                 >
                 <a
                     href=""
                     type="button"
-                    class="btn btn-primary btn-sm"
-                    ><i class="fa fa-pencil-square-o"></i> Edit</a
+                    class="action-crud"
+                    ><i class="fa fa-pencil"></i></a
                 >
                 <a
-                    @click="deleteChecklist(checklist.id)"
+                    :href="['/show/checklist/' + checklist.id]"
                     type="button"
-                    class="btn btn-danger btn-sm"
-                    ><i class="fa fa-trash-o"></i> Delete</a
+                    class="action-crud"
+                    ><i class="fa fa-eye"></i></a
                 >
             </div>
         </div>

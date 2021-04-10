@@ -14118,8 +14118,27 @@ ul.navbar-nav li.nav-item.add-list a {
   align-items: center;
 }
 
-.checklist-item span.checklist-title {
+.checklist-item div.checklist-title {
   font-weight: bold;
+  text-transform: uppercase;
+}
+
+.checklist-item a.action-crud {
+  font-size: 18px;
+}
+
+.checklist-item a.action-crud i.fa-eye {
+  color: green;
+}
+
+.checklist-item a.action-crud i.fa-pencil {
+  color: #3490dc;
+  margin-right: 5px;
+}
+
+.checklist-item a.action-crud i.fa-trash {
+  color: red;
+  margin-right: 8px;
 }
 
 .checklist-user {

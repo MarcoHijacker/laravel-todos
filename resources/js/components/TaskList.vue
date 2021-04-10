@@ -63,11 +63,10 @@
                     <table class="table">
                         <thead class="table-light">
                             <tr class="top-row">
-                                <th scope="col">ID</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Priority</th>
-                                <th scope="col">Status</th>
                                 <th scope="col">Delete</th>
                                 <th scope="col">Action</th>
                             </tr>

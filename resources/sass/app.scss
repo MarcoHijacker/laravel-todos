@@ -138,8 +138,23 @@ ul.navbar-nav {
     display: flex;
     flex-direction: row;
     align-items: center;
-    span.checklist-title {
+    div.checklist-title {
         font-weight: bold;
+        text-transform: uppercase;
+    }
+    a.action-crud {
+            font-size: 18px;
+            i.fa-eye {
+                color: green;
+            }
+            i.fa-pencil {
+                color: #3490dc;
+                margin-right: 5px;
+            }
+            i.fa-trash {
+                color: red;
+                margin-right: 8px;
+            }
     }
 }
 .checklist-user {
