@@ -2024,6 +2024,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      refresh: false,
       checklists: {},
       relatedLists: {
         user_id: this.loggeduser
@@ -2081,15 +2082,7 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         console.log('Checklist data loading completed.');
       });
-    } // updTasks() {
-    //     axios
-    //         .get("http://127.0.0.1:8000/api/tasks/" + )
-    //         .then(response => {
-    //             response.data;
-    //         })
-    //         .finally(() => console.log("Task upd completed"));
-    // }
-
+    }
   }
 });
 
@@ -2181,11 +2174,12 @@ __webpack_require__.r(__webpack_exports__);
       if (confirm('This will perform permanent deletion. Are you sure?')) {
         axios["delete"]("http://127.0.0.1:8000/api/checklists/" + id).then(function (response) {
           _this.trash = response.data;
-          console.log(_this.trash);
         })["finally"](function () {
           _this.$emit("upd-checklists");
 
           _this.getRelatedTasks();
+
+          console.log('Checklist deleted from DB!');
         });
       }
     },
@@ -2193,11 +2187,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get("http://127.0.0.1:8000/api/tasks/balance/" + this.checklist.id).then(function (response) {
-        console.log(response.data);
         _this2.completedTasks = response.data['completed'];
         _this2.overallTasks = response.data['overall'];
-      })["finally"](function () {
-        console.log("Tasks Data loading completed. !!!!!");
+      })["finally"](function () {// Nothing to say here...
       });
     }
   }
@@ -2436,6 +2428,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2457,7 +2450,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    checklist: Number
+    checklist: Number,
+    loggeduser: String
   },
   mounted: function mounted() {
     var _this = this;
@@ -39113,9 +39107,9 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._l(_vm.checklists, function(checklist, index) {
+      _vm._l(_vm.checklists, function(checklist) {
         return _c("single-checklist", {
-          key: "chk" + index,
+          key: "chk" + checklist.id,
           attrs: { checklist: checklist },
           on: { "upd-checklists": _vm.updChecklists }
         })
@@ -39465,16 +39459,6 @@ var render = function() {
             )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "console-wrap" }, [
-        _c("div", { staticClass: "console-track" }, [
-          _c("b", [_vm._v("$")]),
-          _vm._v(" Last update> "),
-          _c("span", { attrs: { id: "command-line" } }, [
-            _vm._v(" " + _vm._s(_vm.lastUpdate) + " ")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
       _c("transition", { attrs: { name: "list" } }, [
         _c(
           "div",
@@ -39688,6 +39672,16 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "console-wrap" }, [
+        _c("div", { staticClass: "console-track" }, [
+          _c("b", [_vm._v("$")]),
+          _vm._v(" " + _vm._s(_vm.loggeduser) + "> "),
+          _c("span", { attrs: { id: "command-line" } }, [
+            _vm._v(" " + _vm._s(_vm.lastUpdate) + " ")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "row justify-content-center tasks-table" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -39696,9 +39690,9 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.tasks, function(task, index) {
+                _vm._l(_vm.tasks, function(task) {
                   return _c("single-task", {
-                    key: "tsk" + index,
+                    key: "tsk" + task.id,
                     attrs: { task: task },
                     on: { "upd-tasks": _vm.updTasks, "new-move": _vm.newMove }
                   })
@@ -52331,8 +52325,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/gianluca/Desktop/my_laravel/laravel-todos-clone/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/gianluca/Desktop/my_laravel/laravel-todos-clone/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\myprojects\laravel-todos\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\marco\OneDrive\Desktop\myprojects\laravel-todos\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

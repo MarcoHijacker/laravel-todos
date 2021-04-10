@@ -11,7 +11,10 @@
   </div><br>
 
   <div id="app">
-    <task-list :checklist="{{ $checklist -> id }}" />
+    <task-list 
+      :checklist="{{ $checklist -> id }}"
+      :loggeduser="'{{ Auth::user() -> firstname }}'"
+    />
   </div>
 
 @endsection

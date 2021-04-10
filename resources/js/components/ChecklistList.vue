@@ -48,8 +48,8 @@
         </transition>
 
         <single-checklist
-          v-for="(checklist, index) in checklists"
-          :key="`chk${index}`"
+          v-for="checklist in checklists"
+          :key="`chk${checklist.id}`"
           :checklist="checklist"
           @upd-checklists="updChecklists"
         />
@@ -63,6 +63,7 @@ export default {
     components: { SingleChecklist },
     data() {
         return {
+            refresh: false,
             checklists: {},
             relatedLists: {
                 user_id: this.loggeduser
@@ -100,9 +101,6 @@ export default {
                 .finally(() => {
                     console.log("Checklist added in DB.");
                     this.updChecklists();
-
-                    
-
                 });
         },
         resetForm() {
@@ -124,14 +122,6 @@ export default {
                     console.log('Checklist data loading completed.');
                 });
         },
-        // updTasks() {
-        //     axios
-        //         .get("http://127.0.0.1:8000/api/tasks/" + )
-        //         .then(response => {
-        //             response.data;
-        //         })
-        //         .finally(() => console.log("Task upd completed"));
-        // }
     }
 };
 </script>

@@ -4,11 +4,6 @@
             <a v-if="!formVisible" @click="toggleForm()" class="task-creation" href="#"><i class="fa fa-plus-square" aria-hidden="true"></i> Create new Task</a>
             <a v-else @click="toggleForm()" class="task-creation" href="#"><i class="fa fa-minus-square" aria-hidden="true"></i> Create new Task</a>
         </div>
-        <div class="console-wrap">
-            <div class="console-track">
-                <b>$</b> Last update> <span id="command-line"> {{ lastUpdate }} </span>
-            </div>
-        </div>
         <transition name="list">
             <div v-show="formVisible" class="new-task-module">
             <hr>
@@ -56,6 +51,12 @@
             </div>
         </transition>
 
+        <div class="console-wrap">
+            <div class="console-track">
+                <b>$</b> {{ loggeduser }}> <span id="command-line"> {{ lastUpdate }} </span>
+            </div>
+        </div>
+
         <div class="row justify-content-center tasks-table">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -73,8 +74,8 @@
                         </thead>
                         <tbody>
                             <single-task
-                                v-for="(task, index) in tasks"
-                                :key="`tsk${index}`"
+                                v-for="task in tasks"
+                                :key="`tsk${task.id}`"
                                 :task="task"
                                 @upd-tasks="updTasks"
                                 @new-move="newMove"
@@ -107,7 +108,8 @@ export default {
         };
     },
     props: {
-        checklist: Number
+        checklist: Number,
+        loggeduser: String
     },
     mounted() {
         axios

@@ -67,7 +67,7 @@
             this.getRelatedTasks();
         },
         props: {
-            checklist: Object
+            checklist: Object,
         },
         methods: {
             deleteChecklist(id) {
@@ -76,28 +76,25 @@
                         .delete("http://127.0.0.1:8000/api/checklists/" + id)
                         .then(response => {
                             this.trash = response.data;
-                            console.log(this.trash);
                         })
                         .finally(() => {
                             this.$emit("upd-checklists");
                             this.getRelatedTasks();
+                            console.log('Checklist deleted from DB!');
                         });
                 }
             },
             getRelatedTasks() {
-
                 axios
                     .get("http://127.0.0.1:8000/api/tasks/balance/" + this.checklist.id)
                     .then(response => {
-                        console.log(response.data);
                         this.completedTasks = response.data['completed'];
                         this.overallTasks = response.data['overall'];
                     })
                     .finally(() => {
-                        console.log("Tasks Data loading completed. !!!!!")
+                        // Nothing to say here...
                     });
-
-            }
+            },
         }
     }
 </script>
