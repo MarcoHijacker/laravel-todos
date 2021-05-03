@@ -14154,23 +14154,29 @@ ul.navbar-nav li.nav-item.add-list a {
   font-weight: bold;
 }
 
-table.table i.fa-pencil {
+i.fa-pencil {
   color: #3490dc;
   font-size: 20px;
 }
 
-table.table i.fa-trash {
+i.fa-trash {
   color: red;
   font-size: 20px;
 }
 
-table.table i.fa-check {
+i.fa-check {
   color: green;
   font-size: 20px;
+  cursor: pointer;
 }
 
-table.table .deniedAct {
+.deniedAct {
   color: lightgrey !important;
+}
+
+input.hidden-input {
+  border: none;
+  background-color: transparent;
 }
 
 tr.top-row > * {

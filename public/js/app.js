@@ -2016,6 +2016,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2150,13 +2151,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       trash: {},
       relatedTasks: {},
       completedTasks: 0,
-      overallTasks: 0
+      overallTasks: 0,
+      isDisabled: true,
+      isIconActive: false,
+      newMove: ''
     };
   },
   mounted: function mounted() {
@@ -2189,6 +2197,28 @@ __webpack_require__.r(__webpack_exports__);
         _this2.overallTasks = response.data['overall'];
       })["finally"](function () {// Nothing to say here...
       });
+    },
+    editChecklist: function editChecklist(isIconActive, id) {
+      var _this3 = this;
+
+      if (isIconActive) {
+        axios.post("http://127.0.0.1:8000/api/checklists/" + id, this.checklist).then(function (_ref) {
+          var data = _ref.data;
+          return console.log(data);
+        })["finally"](function () {
+          _this3.newMove = 'Edited Checklist ID ' + id;
+
+          _this3.$emit("upd-checklists");
+
+          _this3.$emit("new-move", _this3.newMove);
+
+          _this3.unlockEditActions();
+        });
+      }
+    },
+    unlockEditActions: function unlockEditActions() {
+      this.isDisabled = !this.isDisabled;
+      this.isIconActive = !this.isIconActive;
     }
   }
 });
@@ -2264,7 +2294,6 @@ __webpack_require__.r(__webpack_exports__);
       title: "Head",
       trash: {},
       isDisabled: true,
-      isIconVisible: false,
       isIconActive: false,
       newMove: ''
     };
@@ -39122,7 +39151,7 @@ var render = function() {
         return _c("single-checklist", {
           key: "chk" + checklist.id,
           attrs: { checklist: checklist },
-          on: { "upd-checklists": _vm.updChecklists }
+          on: { "upd-checklists": _vm.updChecklists, "new-move": _vm.newMove }
         })
       })
     ],
@@ -39157,9 +39186,27 @@ var render = function() {
     [
       _c("div", { staticClass: "card-header single-list checklist-item" }, [
         _c("div", { staticClass: "checklist-title" }, [
-          _vm._v(
-            "\n               " + _vm._s(_vm.checklist.name) + "\n        "
-          )
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.checklist.name,
+                expression: "checklist.name"
+              }
+            ],
+            class: [_vm.isIconActive ? "" : "hidden-input"],
+            attrs: { type: "text", disabled: _vm.isDisabled },
+            domProps: { value: _vm.checklist.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.checklist, "name", $event.target.value)
+              }
+            }
+          })
         ]),
         _vm._v(" "),
         _c("div", [
@@ -39177,7 +39224,32 @@ var render = function() {
             [_c("i", { staticClass: "fa fa-trash" })]
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "a",
+            {
+              staticClass: "action-crud",
+              attrs: { type: "button" },
+              on: { click: _vm.unlockEditActions }
+            },
+            [_c("i", { staticClass: "fa fa-pencil" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              attrs: { "aria-hidden": "true" },
+              on: {
+                click: function($event) {
+                  return _vm.editChecklist(_vm.isIconActive, _vm.checklist.id)
+                }
+              }
+            },
+            [
+              _c("i", {
+                class: ["fa fa-check", _vm.isIconActive ? "" : "deniedAct"]
+              })
+            ]
+          ),
           _vm._v(" "),
           _c(
             "a",
@@ -39197,7 +39269,27 @@ var render = function() {
         _c("div", { staticClass: "checklist-content" }, [
           _c("div", { staticClass: "checklist-info" }, [
             _c("p", [
-              _vm._v("Description: " + _vm._s(_vm.checklist.description))
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checklist.description,
+                    expression: "checklist.description"
+                  }
+                ],
+                class: [_vm.isIconActive ? "" : "hidden-input"],
+                attrs: { type: "text", disabled: _vm.isDisabled },
+                domProps: { value: _vm.checklist.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.checklist, "description", $event.target.value)
+                  }
+                }
+              })
             ]),
             _vm._v(" "),
             _c("p", [
@@ -39233,18 +39325,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "action-crud", attrs: { href: "", type: "button" } },
-      [_c("i", { staticClass: "fa fa-pencil" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

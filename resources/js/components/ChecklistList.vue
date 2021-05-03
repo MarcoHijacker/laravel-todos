@@ -52,6 +52,7 @@
           :key="`chk${checklist.id}`"
           :checklist="checklist"
           @upd-checklists="updChecklists"
+          @new-move="newMove"
         />
     </section>
 </template>

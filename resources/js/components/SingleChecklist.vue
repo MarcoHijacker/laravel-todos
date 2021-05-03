@@ -2,7 +2,7 @@
     <div style="margin-bottom: 20px;" class="card">
         <div class="card-header single-list checklist-item">
             <div class="checklist-title">
-                   {{ checklist.name }}
+                <input :class="[isIconActive ? '' : 'hidden-input']" type="text" v-model="checklist.name" :disabled="isDisabled">
             </div>
             <div>
                 <a
@@ -12,11 +12,15 @@
                     ><i class="fa fa-trash"></i></a
                 >
                 <a
-                    href=""
+                    @click="unlockEditActions"
                     type="button"
                     class="action-crud"
                     ><i class="fa fa-pencil"></i></a
                 >
+                <a 
+                    @click="editChecklist(isIconActive, checklist.id)"
+                    aria-hidden="true"
+                ><i :class="['fa fa-check', isIconActive ? '' : 'deniedAct']"></i></a>
                 <a
                     :href="['/show/checklist/' + checklist.id]"
                     type="button"
@@ -29,7 +33,7 @@
         <div class="card-body">
             <div class="checklist-content">
                 <div class="checklist-info">
-                    <p>Description: {{ checklist.description }}</p>
+                    <p><input :class="[isIconActive ? '' : 'hidden-input']" type="text" v-model="checklist.description" :disabled="isDisabled"></p>
                     <p>
                         Completed Tasks:
                         <span class="checklist-field">
@@ -58,7 +62,10 @@
                 trash: {},
                 relatedTasks: {},
                 completedTasks: 0,
-                overallTasks: 0
+                overallTasks: 0,
+                isDisabled: true,
+                isIconActive: false,
+                newMove: '',
             };
         },
         mounted() {
@@ -92,6 +99,23 @@
                     .finally(() => {
                         // Nothing to say here...
                     });
+            },
+            editChecklist(isIconActive, id) {
+            if (isIconActive) {
+                axios
+                    .post("http://127.0.0.1:8000/api/checklists/" + id, this.checklist)
+                    .then(({ data }) => console.log(data))
+                    .finally(() => {
+                        this.newMove = 'Edited Checklist ID ' + id;
+                        this.$emit("upd-checklists");
+                        this.$emit("new-move", this.newMove);
+                        this.unlockEditActions();
+                    });
+            }
+            },
+            unlockEditActions() {
+                this.isDisabled = !this.isDisabled;
+                this.isIconActive = !this.isIconActive;
             },
         }
     }

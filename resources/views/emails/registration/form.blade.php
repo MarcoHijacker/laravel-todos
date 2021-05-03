@@ -1,12 +1,12 @@
 @component('mail::message')
-# Introduction
+# Laratodos.it
 
-The body of your message.
+Grazie per esserti registrato su Laratodos.it!
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => 'http://localhost:8000'])
+Vai sul sito locale
 @endcomponent
 
-Thanks,<br>
+Grazie,<br>
 {{ config('app.name') }}
 @endcomponent

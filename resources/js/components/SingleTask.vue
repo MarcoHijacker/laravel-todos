@@ -59,7 +59,6 @@ export default {
             title: "Head",
             trash: {},
             isDisabled: true,
-            isIconVisible: false,
             isIconActive: false,
             newMove: '',
         };

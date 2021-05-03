@@ -169,22 +169,25 @@ ul.navbar-nav {
         }
     }
 }
-table.table {
-    i.fa-pencil {
-        color:#3490dc;
-        font-size: 20px;
-    }
-    i.fa-trash {
-        color: red;
-        font-size: 20px;
-    }
-    i.fa-check {
-        color: green;
-        font-size: 20px;
-    }
-    .deniedAct {
-        color: lightgrey !important;
-    }
+i.fa-pencil {
+    color:#3490dc;
+    font-size: 20px;
+}
+i.fa-trash {
+    color: red;
+    font-size: 20px;
+}
+i.fa-check {
+    color: green;
+    font-size: 20px;
+    cursor: pointer;
+}
+.deniedAct {
+    color: lightgrey !important;
+}
+input.hidden-input {
+    border: none;
+    background-color: transparent;
 }
 tr.top-row > * {
     text-align: center;
