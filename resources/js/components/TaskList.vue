@@ -59,9 +59,9 @@
 
         <div class="row justify-content-center tasks-table">
             <div class="col-md-12">
-                <div class="table-responsive">
+                <div class="table-responsive table-bordered">
                     <table class="table">
-                        <thead class="table-light">
+                        <thead class="thead-dark">
                             <tr class="top-row">
                                 <th scope="col">Status</th>
                                 <th scope="col">Name</th>

@@ -39771,7 +39771,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "row justify-content-center tasks-table" }, [
         _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "table-responsive" }, [
+          _c("div", { staticClass: "table-responsive table-bordered" }, [
             _c("table", { staticClass: "table" }, [
               _vm._m(0),
               _vm._v(" "),
@@ -39799,7 +39799,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "table-light" }, [
+    return _c("thead", { staticClass: "thead-dark" }, [
       _c("tr", { staticClass: "top-row" }, [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
